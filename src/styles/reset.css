@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Patrick+Hand+SC&display=swap");
+
 html,
 body,
 div,
@@ -157,7 +159,7 @@ body {
 }
 
 html {
-  background-color: "#4C4C4C";
+  font-size: 62.5%;
 }
 
 div {

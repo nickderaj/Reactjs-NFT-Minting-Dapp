@@ -13,16 +13,16 @@
   },
   "WHITE_LIST_MINT": false,
   "NFT_NAME": "The Friendly Neighbourhood Ghost Cat",
-  "SYMBOL": "FNGC",
-  "MAX_SUPPLY": 10,
-  "WEI_COST": 20000000000000000,
-  "DISPLAY_COST": "0.02",
+  "SYMBOL": "GC",
+  "MAX_SUPPLY": 1188,
+  "WEI_COST": 60000000000000000,
+  "DISPLAY_COST": "0.06",
   "GAS_LIMIT": 150000,
   "MARKETPLACE": "",
   "MARKETPLACE_LINK": "https://opensea.io/collection/MeanMonkeys",
   "SHOW_BACKGROUND": false,
   "MAX_PER_WALLET": "5 Max Per Transaction",
   "SOLD_OUT": "",
-  "TITLE_ONE": "WE ARE LAUNCHING",
-  "TITLE_TWO": "The Friendly Neighbourhood Ghost Cat"
+  "TITLE_ONE": "Adopt a Ghost Cat",
+  "TITLE_TWO": ""
 }

@@ -4,43 +4,43 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import store from "./redux/store"
+import store from "./redux/store";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
 export const StyledButton = styled.button`
-  padding: 10px;
-  border: none;
-  background-color: var(--secondary);
-  padding: 10px;
-  font-weight: bold;
-  color: var(--primary);
-  width: 100px;
+  align-self: center;
+  font-family: "Patrick Hand SC", cursive;
+  background-color: #f7f8fa;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(245, 220, 255, 1) 4px 4px 1px 1px;
+  box-sizing: border-box;
+  color: #010606;
+  border-color: #010606;
   cursor: pointer;
+  display: inline-block;
+  font-size: 2rem;
+  line-height: 23px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   :hover {
-    background-color: var(--primary);
-    color: var(--secondary);
-  }
-`;
-
-export const StyledButtonFoot = styled.button`
-  padding: 10px;
-  border: none;
-  background-color: var(--secondary);
-  padding: 10px;
-  font-weight: bold;
-  color: var(--primary);
-  width: 100px;
-  cursor: pointer;
-  :hover {
-    background-color: var(--primary);
-    color: var(--secondary);
-  }
-  @media (max-width: 766px) {
-    margin-bottom: 24px;
-    max-width: 120px;
-    width: 120px;
+    transform: translate3d(0, -2px, 0);
   }
 `;
 
@@ -48,7 +48,7 @@ export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 100%;
   border: none;
-  background-color: var(--secondary);
+  background-color: #f7f8fa;
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
@@ -59,9 +59,18 @@ export const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  color: #010606;
+  border-color: #010606;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  box-shadow: rgba(245, 220, 255, 1) 4px 4px 1px 1px;
+  -webkit-box-shadow: rgba(245, 220, 255, 1) 4px 4px 1px 1px;
+  -moz-box-shadow: rgba(245, 220, 255, 1) 4px 4px 1px 1px;
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -72,13 +81,13 @@ export const StyledRoundButton = styled.button`
 export const ResponsiveWrapper = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
   width: 100%;
-  @media (max-width: 766px) {
-    flex-direction: column;
-    flex-direction: column-reverse;
+  /* @media (max-width: 766px) {
+    flex-direction: column; */
+    /* flex-direction: column-reverse; */
   }
 `;
 
@@ -97,14 +106,11 @@ export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   background-color: var(--accent);
   height: auto;
-  width: 100vw;
-  @media (min-width: 900px) {
-    width: 45vw;
-  }
-  @media (min-width: 1000px) {
-    width: 45vw;
-  }
-  transition: width 0.5s;
+  margin: 0 auto;
+  max-width: 30rem;
+  border-radius: 50%;
+  box-shadow: 0.5rem 0.5rem var(--primary-text);
+  /* transition: width 0.5s; */
 `;
 
 export const StyledCont = styled.div`
@@ -153,20 +159,20 @@ function App() {
   });
 
   const claimNFTs = async () => {
-    let allowedtomint=true
+    let allowedtomint = true;
     let paused = await store
-    .getState()
-    .blockchain.smartContract.methods.paused()
-    .call();
+      .getState()
+      .blockchain.smartContract.methods.paused()
+      .call();
     let wlActive = await store
-    .getState()
-    .blockchain.smartContract.methods.whitelistMintEnabled()
-    .call();
+      .getState()
+      .blockchain.smartContract.methods.whitelistMintEnabled()
+      .call();
     if (wlActive) {
       allowedtomint = await store
-      .getState()
-      .blockchain.smartContract.methods.whitelistClaimed(blockchain.account)
-      .call();
+        .getState()
+        .blockchain.smartContract.methods.whitelistClaimed(blockchain.account)
+        .call();
     }
     if (paused) {
       setFeedback("The sale is paused now.");
@@ -217,8 +223,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 30) {
-      newMintAmount = 30;
+    if (newMintAmount > 5) {
+      newMintAmount = 5;
     }
     setMintAmount(newMintAmount);
   };
@@ -233,7 +239,7 @@ function App() {
     const configResponse = await fetch("/config/config.json", {
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
     });
     const config = await configResponse.json();
@@ -256,7 +262,20 @@ function App() {
         style={{ padding: "24px 0" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpeg" : null}
       >
-        <p style={{color: '#010606', margin: 0, textAlign: 'center', fontSize: '5rem', textShadow: '0.4rem 0.4rem #f5dcff', lineHeight: '5rem'}}>The Friendly Neighbourhood Ghost Cat</p>
+        <h1
+          style={{
+            color: "#010606",
+            margin: "0",
+            textAlign: "center",
+            fontSize: "5rem",
+            textShadow: "0.4rem 0.4rem #f5dcff",
+            lineHeight: "5rem",
+            fontFamily: "Patrick Hand SC,cursive",
+            fontWeight: "700",
+          }}
+        >
+          The Friendly Neighbourhood Ghost Cat
+        </h1>
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: "24px 0" }}>
           <s.Container flex={1} jc={"center"} ai={"center"}>
@@ -344,13 +363,12 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST} ETH.
+                  1 Ghost Cat costs {CONFIG.DISPLAY_COST} ETH
                 </s.TextTitle>
-                <s.SpacerXSmall />
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  Excluding gas fees.
+                  (Excluding gas fees)
                 </s.TextDescription>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
@@ -393,7 +411,7 @@ function App() {
                         fontSize: 20,
                         fontWeight: "bold",
                         color: "var(--accent-text)",
-                        paddingTop: 25
+                        paddingTop: 25,
                       }}
                     >
                       {CONFIG.SOLD_OUT}
@@ -451,7 +469,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "..." : "BUY"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -461,71 +479,71 @@ function App() {
             <s.SpacerMedium />
           </s.Container>
         </ResponsiveWrapper>
-        <s.SpacerMedium />
+
         <StyledCont>
           {CONFIG.TWITTER != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.TWITTER, "_blank");
               }}
             >
               TWITTER
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
           {CONFIG.INSTAGRAM != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.INSTAGRAM, "_blank");
               }}
             >
               INSTAGRAM
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
           {CONFIG.DISCORD != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.DISCORD, "_blank");
               }}
             >
               DISCORD
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
           {CONFIG.ROADMAP != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.ROADMAP, "_blank");
               }}
             >
               ROADMAP
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
           {CONFIG.OPENSEA != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.OPENSEA, "_blank");
               }}
             >
               OPENSEA
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
           {CONFIG.SCAN_LINK != "" ? (
-            <StyledButtonFoot
+            <StyledButton
               onClick={(e) => {
                 e.preventDefault();
                 window.open(CONFIG.SCAN_LINK, "_blank");
-              }} 
+              }}
               style={{
-                width: 170
+                width: 170,
               }}
             >
               VERIFY CONTRACT
-            </StyledButtonFoot>
-          ):null}
+            </StyledButton>
+          ) : null}
         </StyledCont>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
@@ -536,19 +554,9 @@ function App() {
             }}
           >
             Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
-          </s.TextDescription>
-          <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
+            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. <br />
+            Please note: Once you make the purchase, you cannot undo this
+            action.
           </s.TextDescription>
         </s.Container>
       </s.Container>
