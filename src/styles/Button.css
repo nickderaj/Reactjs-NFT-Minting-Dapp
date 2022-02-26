@@ -1,0 +1,44 @@
+.button {
+  align-self: center;
+  font-family: "Patrick Hand SC", cursive;
+  background-color: #f7f8fa;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(245, 220, 255, 1) 4px 4px 1px 1px;
+  box-sizing: border-box;
+  color: #010606;
+  border-color: #010606;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 3rem;
+  line-height: 23px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+.button--text {
+  height: 3rem;
+}
+
+.button--img {
+  width: 3rem;
+  height: 3rem;
+}

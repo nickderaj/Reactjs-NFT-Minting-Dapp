@@ -5,6 +5,7 @@ import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import store from "./redux/store";
+import Header from "./Header";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -115,8 +116,8 @@ export const StyledImg = styled.img`
 
 export const StyledCont = styled.div`
   /* width: 60%; */
-  border: 2px solid black;
-  padding: 24px;
+  /* border: 2px solid black; */
+  padding: 0 10rem 2rem 10rem;
   display: flex;
   justify-content: center;
   grid-gap: 3rem;
@@ -138,7 +139,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(`Click MINT to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -179,7 +180,7 @@ function App() {
       setFeedback("The sale is paused now.");
     } else {
       if (!allowedtomint) {
-        setFeedback("Sorry, you are not whitelisted. wait until public sale.");
+        setFeedback("Sorry, you are not whitelisted. Wait until public sale.");
       } else {
         let cost = CONFIG.WEI_COST;
         let gasLimit = CONFIG.GAS_LIMIT;
@@ -205,9 +206,7 @@ function App() {
           })
           .then((receipt) => {
             console.log(receipt);
-            setFeedback(
-              `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-            );
+            setFeedback(`You've adopted a Ghost Cat! Thank you so much!`);
             setClaimingNft(false);
           });
       }
@@ -256,313 +255,306 @@ function App() {
   }, [blockchain.account]);
 
   return (
-    <s.Screen>
-      <s.Container
-        flex={1}
-        ai={"center"}
-        style={{ padding: "24px 0" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpeg" : null}
-      >
-        <h1
-          style={{
-            color: "#010606",
-            margin: "0",
-            textAlign: "center",
-            fontSize: "5rem",
-            textShadow: "0.4rem 0.4rem #f5dcff",
-            lineHeight: "5rem",
-            fontFamily: "Patrick Hand SC,cursive",
-            fontWeight: "700",
-          }}
+    <>
+      <Header />
+      <div style={{ paddingBottom: "2.8rem", backgroundColor: "#f7f8fa" }} />
+      <s.Screen>
+        <s.Container
+          flex={1}
+          ai={"center"}
+          style={{ padding: "24px 0 0 0" }}
+          image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpeg" : null}
         >
-          The Friendly Neighbourhood Ghost Cat
-        </h1>
-        <s.SpacerSmall />
-        <ResponsiveWrapper flex={1} style={{ padding: "24px 0" }}>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/examples.gif"} />
-          </s.Container>
-          <s.SpacerLarge />
-          <s.Container
-            flex={2}
-            jc={"center"}
-            ai={"center"}
+          <h1
             style={{
-              padding: 24,
-              borderRadius: 24,
+              color: "#010606",
+              margin: "0",
+              textAlign: "center",
+              fontSize: "5rem",
+              textShadow: "0.4rem 0.4rem #f5dcff",
+              lineHeight: "5rem",
+              fontFamily: "Patrick Hand SC,cursive",
+              fontWeight: "700",
             }}
           >
-            <s.TextTitle
+            The Friendly Neighbourhood Ghost Cat
+          </h1>
+          <s.SpacerSmall />
+          <ResponsiveWrapper flex={1} style={{ padding: "24px 0" }}>
+            <s.Container flex={1} jc={"center"} ai={"center"}>
+              <StyledImg alt={"example"} src={"/config/images/examples.gif"} />
+            </s.Container>
+            <s.SpacerLarge />
+            <s.Container
+              flex={2}
+              jc={"center"}
+              ai={"center"}
               style={{
-                textAlign: "center",
-                fontSize: "4rem",
-                fontWeight: "bold",
-                color: "black",
+                padding: "2.4rem 2.4rem 0 2.4rem",
+                borderRadius: 24,
               }}
             >
-              {CONFIG.TITLE_ONE}
-            </s.TextTitle>
-            <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 30,
-                fontWeight: "bold",
-                color: "black",
-              }}
-            >
-              {CONFIG.TITLE_TWO}
-            </s.TextTitle>
-            <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: "25",
-                color: "#66bcd7",
-              }}
-            >
-              {CONFIG.MAX_PER_WALLET}
-            </s.TextTitle>
-            <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 50,
-                fontWeight: "bold",
-                color: "black",
-              }}
-            >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
-            </s.TextTitle>
-            <s.TextDescription
-              style={{
-                textAlign: "center",
-                color: "black",
-              }}
-            >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
-            </s.TextDescription>
-            <s.SpacerSmall />
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-              <>
-                <s.TextTitle style={{ textAlign: "center", color: "black" }}>
-                  The sale has ended.
-                </s.TextTitle>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "black" }}
-                >
-                  You can still find {CONFIG.NFT_NAME} on
-                </s.TextDescription>
-                <s.SpacerSmall />
-                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
-                </StyledLink>
-              </>
-            ) : (
-              <>
-                <s.TextTitle style={{ textAlign: "center", color: "black" }}>
-                  1 Ghost Cat costs {CONFIG.DISPLAY_COST} ETH
-                </s.TextTitle>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "black" }}
-                >
-                  (Excluding gas fees)
-                </s.TextDescription>
-                <s.SpacerSmall />
-                {blockchain.account === "" ||
-                blockchain.smartContract === null ? (
-                  <s.Container ai={"center"} jc={"center"}>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "black",
-                      }}
-                    >
-                      Connect your Metamask wallet
-                    </s.TextDescription>
-                    <s.SpacerSmall />
-                    <StyledButton
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(connect());
-                        getData();
-                      }}
-                    >
-                      CONNECT
-                    </StyledButton>
-                    {blockchain.errorMsg !== "" ? (
-                      <>
-                        <s.SpacerSmall />
-                        <s.TextDescription
-                          style={{
-                            textAlign: "center",
-                            color: "black",
-                          }}
-                        >
-                          {blockchain.errorMsg}
-                        </s.TextDescription>
-                      </>
-                    ) : null}
-                    <s.TextTitle
-                      style={{
-                        textAlign: "center",
-                        fontSize: 20,
-                        fontWeight: "bold",
-                        color: "black",
-                        paddingTop: 25,
-                      }}
-                    >
-                      {CONFIG.SOLD_OUT}
-                    </s.TextTitle>
-                  </s.Container>
-                ) : (
-                  <>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "black",
-                      }}
-                    >
-                      {feedback}
-                    </s.TextDescription>
-                    <s.SpacerMedium />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledRoundButton
-                        style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          decrementMintAmount();
-                        }}
-                      >
-                        -
-                      </StyledRoundButton>
-                      <s.SpacerMedium />
+              <s.TextTitle
+                style={{
+                  textAlign: "center",
+                  fontSize: "4rem",
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
+                {CONFIG.TITLE_ONE}
+              </s.TextTitle>
+              <s.TextTitle
+                style={{
+                  textAlign: "center",
+                  fontSize: 30,
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
+                {CONFIG.TITLE_TWO}
+              </s.TextTitle>
+              <s.TextTitle
+                style={{
+                  textAlign: "center",
+                  fontSize: "25",
+                  color: "#66bcd7",
+                }}
+              >
+                {CONFIG.MAX_PER_WALLET}
+              </s.TextTitle>
+              <s.TextTitle
+                style={{
+                  textAlign: "center",
+                  fontSize: 50,
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
+                {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              </s.TextTitle>
+              {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                <>
+                  <s.TextTitle style={{ textAlign: "center", color: "black" }}>
+                    The sale has ended.
+                  </s.TextTitle>
+                  <s.TextDescription
+                    style={{ textAlign: "center", color: "black" }}
+                  >
+                    You can still find {CONFIG.NFT_NAME} on
+                  </s.TextDescription>
+                  <s.SpacerSmall />
+                  <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                    {CONFIG.MARKETPLACE}
+                  </StyledLink>
+                </>
+              ) : (
+                <>
+                  <s.TextTitle style={{ textAlign: "center", color: "black" }}>
+                    1 Ghost Cat costs {CONFIG.DISPLAY_COST} ETH
+                  </s.TextTitle>
+                  <s.TextDescription
+                    style={{ textAlign: "center", color: "black" }}
+                  >
+                    (Excluding gas fees)
+                  </s.TextDescription>
+                  <s.SpacerSmall />
+                  {blockchain.account === "" ||
+                  blockchain.smartContract === null ? (
+                    <s.Container ai={"center"} jc={"center"}>
                       <s.TextDescription
                         style={{
                           textAlign: "center",
                           color: "black",
                         }}
                       >
-                        {mintAmount}
+                        Connect your Metamask wallet
                       </s.TextDescription>
-                      <s.SpacerMedium />
-                      <StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          incrementMintAmount();
-                        }}
-                      >
-                        +
-                      </StyledRoundButton>
-                    </s.Container>
-                    <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <s.SpacerSmall />
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          claimNFTs();
+                          dispatch(connect());
                           getData();
                         }}
                       >
-                        {claimingNft ? "MINTING" : "MINT"}
+                        CONNECT
                       </StyledButton>
+                      {blockchain.errorMsg !== "" ? (
+                        <>
+                          <s.SpacerSmall />
+                          <s.TextDescription
+                            style={{
+                              textAlign: "center",
+                              color: "black",
+                            }}
+                          >
+                            {blockchain.errorMsg}
+                          </s.TextDescription>
+                        </>
+                      ) : null}
+                      <s.TextTitle
+                        style={{
+                          textAlign: "center",
+                          fontSize: 20,
+                          fontWeight: "bold",
+                          color: "black",
+                          paddingTop: 25,
+                        }}
+                      >
+                        {CONFIG.SOLD_OUT}
+                      </s.TextTitle>
                     </s.Container>
-                  </>
-                )}
-              </>
-            )}
-            <s.SpacerMedium />
-          </s.Container>
-        </ResponsiveWrapper>
+                  ) : (
+                    <>
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "black",
+                        }}
+                      >
+                        {feedback}
+                      </s.TextDescription>
+                      <s.SpacerMedium />
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledRoundButton
+                          style={{ lineHeight: 0.4 }}
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            decrementMintAmount();
+                          }}
+                        >
+                          -
+                        </StyledRoundButton>
+                        <s.SpacerMedium />
+                        <s.TextDescription
+                          style={{
+                            textAlign: "center",
+                            color: "black",
+                          }}
+                        >
+                          {mintAmount}
+                        </s.TextDescription>
+                        <s.SpacerMedium />
+                        <StyledRoundButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            incrementMintAmount();
+                          }}
+                        >
+                          +
+                        </StyledRoundButton>
+                      </s.Container>
+                      <s.SpacerSmall />
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}
+                        >
+                          {claimingNft ? "MINTING" : "MINT"}
+                        </StyledButton>
+                      </s.Container>
+                    </>
+                  )}
+                </>
+              )}
+              <s.SpacerMedium />
+            </s.Container>
+          </ResponsiveWrapper>
 
-        <StyledCont>
-          {CONFIG.TWITTER != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.TWITTER, "_blank");
-              }}
-            >
-              TWITTER
-            </StyledButton>
-          ) : null}
-          {CONFIG.INSTAGRAM != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.INSTAGRAM, "_blank");
-              }}
-            >
-              INSTAGRAM
-            </StyledButton>
-          ) : null}
-          {CONFIG.DISCORD != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.DISCORD, "_blank");
-              }}
-            >
-              DISCORD
-            </StyledButton>
-          ) : null}
-          {CONFIG.ROADMAP != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.ROADMAP, "_blank");
-              }}
-            >
-              ROADMAP
-            </StyledButton>
-          ) : null}
-          {CONFIG.OPENSEA != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.OPENSEA, "_blank");
-              }}
+          <StyledCont>
+            {CONFIG.TWITTER != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.TWITTER, "_blank");
+                }}
+              >
+                TWITTER
+              </StyledButton>
+            ) : null}
+            {CONFIG.INSTAGRAM != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.INSTAGRAM, "_blank");
+                }}
+              >
+                INSTAGRAM
+              </StyledButton>
+            ) : null}
+            {CONFIG.DISCORD != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.DISCORD, "_blank");
+                }}
+              >
+                DISCORD
+              </StyledButton>
+            ) : null}
+            {CONFIG.ROADMAP != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.ROADMAP, "_blank");
+                }}
+              >
+                ROADMAP
+              </StyledButton>
+            ) : null}
+            {CONFIG.OPENSEA != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.OPENSEA, "_blank");
+                }}
+                style={{
+                  width: 120,
+                  boxShadow: "#bcf0fb 4px 4px 1px 1px",
+                }}
+              >
+                OPENSEA
+              </StyledButton>
+            ) : null}
+            {CONFIG.SCAN_LINK != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.SCAN_LINK, "_blank");
+                }}
+                style={{
+                  width: 120,
+                  boxShadow: "#bcf0fb 4px 4px 1px 1px",
+                }}
+              >
+                CONTRACT
+              </StyledButton>
+            ) : null}
+          </StyledCont>
+          <s.SpacerMedium />
+          <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
+            <s.TextDescription
               style={{
-                width: 120,
-                boxShadow: "#bcf0fb 4px 4px 1px 1px",
+                textAlign: "center",
+                color: "black",
               }}
             >
-              OPENSEA
-            </StyledButton>
-          ) : null}
-          {CONFIG.SCAN_LINK != "" ? (
-            <StyledButton
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(CONFIG.SCAN_LINK, "_blank");
-              }}
-              style={{
-                width: 120,
-                boxShadow: "#bcf0fb 4px 4px 1px 1px",
-              }}
-            >
-              CONTRACT
-            </StyledButton>
-          ) : null}
-        </StyledCont>
-        <s.SpacerMedium />
-        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "black",
-            }}
-          >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. <br />
-            Please note: Once you make the purchase, you cannot undo this
-            action.
-          </s.TextDescription>
+              Please make sure you are connected to the right network (
+              {CONFIG.NETWORK.NAME} Mainnet) and the correct address. <br />
+              Please note: Once you make the purchase, you cannot undo this
+              action.
+            </s.TextDescription>
+          </s.Container>
         </s.Container>
-      </s.Container>
-    </s.Screen>
+      </s.Screen>
+    </>
   );
 }
 
