@@ -52,21 +52,24 @@ export const Container = styled.div`
 `;
 
 export const TextTitle = styled.h2`
+  font-family: "Patrick Hand SC", cursive;
   color: var(--primary-text);
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 500;
   line-height: 1.6;
 `;
 
 export const TextSubTitle = styled.h3`
+  font-family: "Patrick Hand SC", cursive;
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 1.6;
 `;
 
 export const TextDescription = styled.p`
+  font-family: "Patrick Hand SC", cursive;
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 1.6;
 `;
 

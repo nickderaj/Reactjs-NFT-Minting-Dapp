@@ -295,7 +295,7 @@ function App() {
             <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 30,
+                fontSize: "4rem",
                 fontWeight: "bold",
                 color: "black",
               }}
@@ -466,7 +466,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "..." : "MINT"}
+                        {claimingNft ? "MINTING" : "MINT"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -526,6 +526,7 @@ function App() {
               }}
               style={{
                 width: 120,
+                boxShadow: "#bcf0fb 4px 4px 1px 1px",
               }}
             >
               OPENSEA
@@ -539,6 +540,7 @@ function App() {
               }}
               style={{
                 width: 120,
+                boxShadow: "#bcf0fb 4px 4px 1px 1px",
               }}
             >
               CONTRACT
