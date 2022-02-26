@@ -52,7 +52,7 @@ export const StyledRoundButton = styled.button`
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
-  color: var(--primary-text);
+  color: black;
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -104,21 +104,22 @@ export const StyledLogo = styled.img`
 
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  background-color: var(--accent);
+  background-color: #66bcd7;
   height: auto;
   margin: 0 auto;
   max-width: 30rem;
   border-radius: 50%;
-  box-shadow: 0.5rem 0.5rem var(--primary-text);
+  box-shadow: 0.5rem 0.5rem black;
   /* transition: width 0.5s; */
 `;
 
 export const StyledCont = styled.div`
-  width: 90%;
-  border: 2px solid var(--primary-text);
+  /* width: 60%; */
+  border: 2px solid black;
   padding: 24px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  grid-gap: 3rem;
   flex-direction: row;
   align-items: center;
   @media (max-width: 766px) {
@@ -128,7 +129,7 @@ export const StyledCont = styled.div`
 `;
 
 export const StyledLink = styled.a`
-  color: var(--secondary);
+  color: black;
   text-decoration: none;
 `;
 
@@ -296,7 +297,7 @@ function App() {
                 textAlign: "center",
                 fontSize: 30,
                 fontWeight: "bold",
-                color: "var(--accent-text)",
+                color: "black",
               }}
             >
               {CONFIG.TITLE_ONE}
@@ -306,7 +307,7 @@ function App() {
                 textAlign: "center",
                 fontSize: 30,
                 fontWeight: "bold",
-                color: "var(--accent-text)",
+                color: "black",
               }}
             >
               {CONFIG.TITLE_TWO}
@@ -315,7 +316,7 @@ function App() {
               style={{
                 textAlign: "center",
                 fontSize: "25",
-                color: "var(--accent)",
+                color: "#66bcd7",
               }}
             >
               {CONFIG.MAX_PER_WALLET}
@@ -325,7 +326,7 @@ function App() {
                 textAlign: "center",
                 fontSize: 50,
                 fontWeight: "bold",
-                color: "var(--accent-text)",
+                color: "black",
               }}
             >
               {data.totalSupply} / {CONFIG.MAX_SUPPLY}
@@ -333,7 +334,7 @@ function App() {
             <s.TextDescription
               style={{
                 textAlign: "center",
-                color: "var(--primary-text)",
+                color: "black",
               }}
             >
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
@@ -343,13 +344,11 @@ function App() {
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
+                <s.TextTitle style={{ textAlign: "center", color: "black" }}>
                   The sale has ended.
                 </s.TextTitle>
                 <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  style={{ textAlign: "center", color: "black" }}
                 >
                   You can still find {CONFIG.NFT_NAME} on
                 </s.TextDescription>
@@ -360,13 +359,11 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
+                <s.TextTitle style={{ textAlign: "center", color: "black" }}>
                   1 Ghost Cat costs {CONFIG.DISPLAY_COST} ETH
                 </s.TextTitle>
                 <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  style={{ textAlign: "center", color: "black" }}
                 >
                   (Excluding gas fees)
                 </s.TextDescription>
@@ -377,7 +374,7 @@ function App() {
                     <s.TextDescription
                       style={{
                         textAlign: "center",
-                        color: "var(--accent-text)",
+                        color: "black",
                       }}
                     >
                       Connect your Metamask wallet
@@ -398,7 +395,7 @@ function App() {
                         <s.TextDescription
                           style={{
                             textAlign: "center",
-                            color: "var(--accent-text)",
+                            color: "black",
                           }}
                         >
                           {blockchain.errorMsg}
@@ -410,7 +407,7 @@ function App() {
                         textAlign: "center",
                         fontSize: 20,
                         fontWeight: "bold",
-                        color: "var(--accent-text)",
+                        color: "black",
                         paddingTop: 25,
                       }}
                     >
@@ -422,7 +419,7 @@ function App() {
                     <s.TextDescription
                       style={{
                         textAlign: "center",
-                        color: "var(--accent-text)",
+                        color: "black",
                       }}
                     >
                       {feedback}
@@ -443,7 +440,7 @@ function App() {
                       <s.TextDescription
                         style={{
                           textAlign: "center",
-                          color: "var(--accent-text)",
+                          color: "black",
                         }}
                       >
                         {mintAmount}
@@ -469,7 +466,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "..." : "BUY"}
+                        {claimingNft ? "..." : "MINT"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -527,6 +524,9 @@ function App() {
                 e.preventDefault();
                 window.open(CONFIG.OPENSEA, "_blank");
               }}
+              style={{
+                width: 120,
+              }}
             >
               OPENSEA
             </StyledButton>
@@ -538,10 +538,10 @@ function App() {
                 window.open(CONFIG.SCAN_LINK, "_blank");
               }}
               style={{
-                width: 170,
+                width: 120,
               }}
             >
-              VERIFY CONTRACT
+              CONTRACT
             </StyledButton>
           ) : null}
         </StyledCont>
@@ -550,7 +550,7 @@ function App() {
           <s.TextDescription
             style={{
               textAlign: "center",
-              color: "var(--primary-text)",
+              color: "black",
             }}
           >
             Please make sure you are connected to the right network (
