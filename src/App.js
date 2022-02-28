@@ -286,7 +286,7 @@ function App() {
           <s.SpacerSmall />
           <ResponsiveWrapper flex={1} style={{ padding: "24px 0" }}>
             <s.Container flex={1} jc={"center"} ai={"center"}>
-              <StyledImg alt={"example"} src={"/config/images/examples.gif"} />
+              <StyledImg alt={"Ghost Cats"} src={"/config/images/mint.gif"} />
             </s.Container>
             <s.SpacerLarge />
             <s.Container
@@ -335,7 +335,7 @@ function App() {
                   color: "black",
                 }}
               >
-                {blockchain.account !== "" && blockchain.smartContract !== null
+                {data.totalSupply !== 0
                   ? `${data.totalSupply} / ${CONFIG.MAX_SUPPLY}`
                   : `? / ${CONFIG.MAX_SUPPLY}`}
               </s.TextTitle>
