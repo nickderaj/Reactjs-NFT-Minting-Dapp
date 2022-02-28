@@ -10,6 +10,13 @@ import Header from "./Header";
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
+const whitelistedAddresses = ["0x8346BCbF229E1E45d8e7742b57940e62b39c90F1"];
+
+const lowerCaseWhitelist = whitelistedAddresses.map((el) => el.toLowerCase());
+const whitelistedFull = [...whitelistedAddresses, ...lowerCaseWhitelist];
+
+console.log(whitelistedFull);
+
 export const StyledButton = styled.button`
   align-self: center;
   font-family: "Patrick Hand SC", cursive;
@@ -110,7 +117,7 @@ export const StyledImg = styled.img`
   margin: 0 auto;
   max-width: 30rem;
   border-radius: 50%;
-  box-shadow: 0.5rem 0.5rem black;
+  box-shadow: 0 0 1rem 0.2rem black;
   /* transition: width 0.5s; */
 `;
 
@@ -171,15 +178,12 @@ function App() {
       .blockchain.smartContract.methods.whitelistMintEnabled()
       .call();
     if (wlActive) {
-      allowedtomint = await store
-        .getState()
-        .blockchain.smartContract.methods.whitelistClaimed(blockchain.account)
-        .call();
+      allowedtomint = whitelistedFull.includes(blockchain.account);
     }
     if (paused) {
-      setFeedback("The sale is paused now.");
+      setFeedback("The sale is not open yet.");
     } else {
-      if (!allowedtomint) {
+      if (wlActive && !allowedtomint) {
         setFeedback("Sorry, you are not whitelisted. Wait until public sale.");
       } else {
         let cost = CONFIG.WEI_COST;
@@ -223,8 +227,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 5) {
-      newMintAmount = 5;
+    if (newMintAmount > 3) {
+      newMintAmount = 3;
     }
     setMintAmount(newMintAmount);
   };
@@ -331,7 +335,9 @@ function App() {
                   color: "black",
                 }}
               >
-                {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+                {blockchain.account !== "" && blockchain.smartContract !== null
+                  ? `${data.totalSupply} / ${CONFIG.MAX_SUPPLY}`
+                  : `? / ${CONFIG.MAX_SUPPLY}`}
               </s.TextTitle>
               {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
                 <>
