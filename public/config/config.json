@@ -17,7 +17,7 @@
   "MAX_SUPPLY": 1188,
   "WEI_COST": 60000000000000000,
   "DISPLAY_COST": "0.06",
-  "GAS_LIMIT": 210000,
+  "GAS_LIMIT": 150000,
   "MARKETPLACE": "Opensea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/ghostcat-nft",
   "SHOW_BACKGROUND": false,
