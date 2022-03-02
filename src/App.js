@@ -10,12 +10,13 @@ import Header from "./Header";
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
-const whitelistedAddresses = ["0x8346BCbF229E1E45d8e7742b57940e62b39c90F1"];
+const whitelistedAddresses = [
+  "0x8346BCbF229E1E45d8e7742b57940e62b39c90F1",
+  "0xF75A7ac43E818C7aABF0b4669970902C63042110",
+];
 
 const lowerCaseWhitelist = whitelistedAddresses.map((el) => el.toLowerCase());
 const whitelistedFull = [...whitelistedAddresses, ...lowerCaseWhitelist];
-
-console.log(whitelistedFull);
 
 export const StyledButton = styled.button`
   align-self: center;
@@ -190,8 +191,6 @@ function App() {
         let gasLimit = CONFIG.GAS_LIMIT;
         let totalCostWei = String(cost * mintAmount);
         let totalGasLimit = String(gasLimit * mintAmount);
-        console.log("Cost: ", totalCostWei);
-        console.log("Gas limit: ", totalGasLimit);
         setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
         setClaimingNft(true);
         blockchain.smartContract.methods
