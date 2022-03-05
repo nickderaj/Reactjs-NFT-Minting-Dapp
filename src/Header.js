@@ -2,7 +2,7 @@ import "./styles/Header.css";
 import twitter from "./social/twitter.svg";
 import insta from "./social/insta.svg";
 import discord from "./social/discord.svg";
-import youtube from "./social/youtube.svg";
+import opensea from "./social/opensea.svg";
 import home from "./social/home.svg";
 import ButtonExt from "./ButtonExt";
 
@@ -41,9 +41,9 @@ const Header = () => {
           </div>
           <div className="header--nav-items">
             <ButtonExt
-              location="https://www.youtube.com/channel/UCpj7jclU-qiixhX_Evt04Xw"
-              image={youtube}
-              alt={"Youtube"}
+              location="https://opensea.io/collection/ghostcat-nft"
+              image={opensea}
+              alt={"Opensea"}
             />
           </div>
         </div>
