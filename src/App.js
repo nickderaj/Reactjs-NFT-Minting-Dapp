@@ -294,6 +294,7 @@ const whitelistedAddresses = [
   "0xA4D12950Ed4494e4dF86e2ef319Cf99370451d92",
   "0xb737bF8ded5D847e0dd0025E3076772EF250eEC3",
   "0x053EE663950ef883fc774aD77B14C5c8ea43ce38",
+  "0xdae6fC7Ee0DBE50A5f6822E79b8B2E2e237B21A2",
 ];
 
 const lowerCaseWhitelist = whitelistedAddresses.map((el) => el.toLowerCase());
