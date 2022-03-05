@@ -743,14 +743,46 @@ function App() {
                   )}
                 </>
               )}
+              <s.SpacerMedium />
             </s.Container>
           </ResponsiveWrapper>
+
+          <StyledCont>
+            {CONFIG.OPENSEA != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.OPENSEA, "_blank");
+                }}
+                style={{
+                  width: 120,
+                  boxShadow: "#bcf0fb 4px 4px 1px 1px",
+                }}
+              >
+                OPENSEA
+              </StyledButton>
+            ) : null}
+            {/* {CONFIG.SCAN_LINK != "" ? (
+              <StyledButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(CONFIG.SCAN_LINK, "_blank");
+                }}
+                style={{
+                  width: 120,
+                  boxShadow: "#bcf0fb 4px 4px 1px 1px",
+                }}
+              >
+                CONTRACT
+              </StyledButton>
+            ) : null} */}
+          </StyledCont>
           <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
             <s.TextDescription
               style={{
                 textAlign: "center",
                 color: "black",
-                padding: "4rem 0",
+                paddingBottom: "4rem",
               }}
             >
               Please make sure you are connected to the right network (
