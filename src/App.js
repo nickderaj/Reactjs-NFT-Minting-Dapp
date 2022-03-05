@@ -771,7 +771,7 @@ function App() {
                 OPENSEA
               </StyledButton>
             ) : null}
-            {/* {CONFIG.SCAN_LINK != "" ? (
+            {CONFIG.SCAN_LINK != "" ? (
               <StyledButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -784,7 +784,7 @@ function App() {
               >
                 CONTRACT
               </StyledButton>
-            ) : null} */}
+            ) : null}
           </StyledCont>
           <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
             <s.TextDescription
